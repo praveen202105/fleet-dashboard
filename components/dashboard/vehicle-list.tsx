@@ -32,7 +32,7 @@ export function VehicleList({
                 const motionStatus = getMotionStatus(position)
                 const speedKmh = position ? knotsToKmh(position.speed) : 0
                 const timeAgo = getTimeAgo(position?.deviceTime || device.lastUpdate)
-                console.log("position", getDevicePosition(device.id));
+                // console.log("position", getDevicePosition(device.id));
 
                 return (
                     <VehicleCard

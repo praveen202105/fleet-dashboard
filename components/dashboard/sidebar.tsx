@@ -57,7 +57,7 @@ export function Sidebar({
 
     return (
         <div className="w-100 bg-white border-r border-gray-200 overflow-y-auto">
-            <SidebarHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+            {/* <SidebarHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} /> */}
 
             <StatusFilters
                 statusFilter={statusFilter}
