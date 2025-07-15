@@ -75,7 +75,7 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
         center,
       });
 
-      mapInstanceRef.current = map;
+      // mapInstanceRef.current = map;
 
       positions.forEach((position) => {
         const device = devices.find((d) => d.id === position.deviceId);
