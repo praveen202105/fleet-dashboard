@@ -56,7 +56,7 @@ export function Sidebar({
     const transitCount = devices.filter((d) => getMotionStatus(getDevicePosition(d.id)) === "Moving").length
 
     return (
-        <div className="w-100 bg-white border-r border-gray-200 overflow-y-auto">
+        <div className="w-100 mt-4  bg-white border-r border-gray-200 overflow-y-auto">
             {/* <SidebarHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} /> */}
 
             <StatusFilters
