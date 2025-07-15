@@ -62,40 +62,6 @@ export function useDashboardData() {
             category: "Car",
             disabled: false,
             expirationTime: null
-        },
-        {
-            id: 6,
-            attributes: {},
-            groupId: 2,
-            calendarId: 3,
-            name: "Vehicle-Delta",
-            uniqueId: "864275071897400",
-            status: "unknown",
-            lastUpdate: "2025-07-13T18:05:30.000+00:00",
-            positionId: 382,
-            phone: "+916543218765",
-            model: "Ruptela FM-Eco4",
-            contact: "delta.driver@example.com",
-            category: "Bus",
-            disabled: false,
-            expirationTime: "2025-12-31T00:00:00.000+00:00"
-        },
-        {
-            id: 7,
-            attributes: {},
-            groupId: 3,
-            calendarId: 4,
-            name: "Vehicle-Echo",
-            uniqueId: "864275071897500",
-            status: "maintenance",
-            lastUpdate: "2025-07-11T09:30:45.000+00:00",
-            positionId: 383,
-            phone: "+915678123456",
-            model: "Concox GT06N",
-            contact: "echo.driver@example.com",
-            category: "Trailer",
-            disabled: true,
-            expirationTime: "2026-06-30T00:00:00.000+00:00"
         }
     ])
     const [positions, setPositions] = useState<Position[]>([
@@ -204,97 +170,28 @@ export function useDashboardData() {
             network: null,
             geofenceIds: null
         },
-        {
-            id: 382,
-            attributes: {
-                priority: 0,
-                sat: 3,
-                event: 243,
-                ignition: false,
-                motion: false,
-                rssi: 2,
-                pdop: 3.0,
-                hdop: 4.0,
-                power: 11.2,
-                battery: 3.6,
-                operator: 40473,
-                odometer: 7500,
-                distance: 0,
-                totalDistance: 9000
-            },
-            deviceId: 6,
-            protocol: "ruptela",
-            serverTime: "2025-07-13T18:05:30.000+00:00",
-            deviceTime: "2025-07-13T18:05:28.000+00:00",
-            fixTime: "2025-07-13T18:05:28.000+00:00",
-            outdated: false,
-            valid: true,
-            latitude: 12.8900,
-            longitude: 74.8600,
-            altitude: 5,
-            speed: 0,
-            course: 0,
-            address: "Mangalore, India",
-            accuracy: 12,
-            network: null,
-            geofenceIds: null
-        },
-        {
-            id: 383,
-            attributes: {
-                priority: 0,
-                sat: 4,
-                event: 244,
-                ignition: false,
-                motion: false,
-                rssi: 1,
-                pdop: 4.5,
-                hdop: 5.0,
-                power: 10.9,
-                battery: 3.2,
-                operator: 40474,
-                odometer: 6500,
-                distance: 0,
-                totalDistance: 8000
-            },
-            deviceId: 7,
-            protocol: "concox",
-            serverTime: "2025-07-11T09:30:45.000+00:00",
-            deviceTime: "2025-07-11T09:30:42.000+00:00",
-            fixTime: "2025-07-11T09:30:42.000+00:00",
-            outdated: false,
-            valid: true,
-            latitude: 12.8500,
-            longitude: 74.8300,
-            altitude: 10,
-            speed: 0,
-            course: 0,
-            address: "Mangalore, India",
-            accuracy: 15,
-            network: null,
-            geofenceIds: null
-        }
+
     ])
 
     const fetchData = useCallback(async () => {
         try {
-            const [devicesRes, positionsRes] = await Promise.all([fetch("/api/devices"), fetch("/api/positions")])
+            // const [devicesRes, positionsRes] = await Promise.all([fetch("/api/devices"), fetch("/api/positions")])
 
-            if (!devicesRes.ok || !positionsRes.ok) {
-                router.push("/login")
-                return
-            }
+            // if (!devicesRes.ok || !positionsRes.ok) {
+            //     router.push("/login")
+            //     return
+            // }
 
-            const devicesData = await devicesRes.json()
-            const positionsData = await positionsRes.json()
+            // const devicesData = await devicesRes.json()
+            // const positionsData = await positionsRes.json()
 
             // setDevices(devicesData)
             // setPositions(positionsData)
             setLastUpdate(new Date())
 
-            if (devicesData.length > 0 && !selectedDevice) {
-                setSelectedDevice(devicesData[0])
-            }
+            // if (devicesData.length > 0 && !selectedDevice) {
+            //     setSelectedDevice(devicesData[0])
+            // }
         } catch (error) {
             console.error("Error fetching data:", error)
             router.push("/login")
