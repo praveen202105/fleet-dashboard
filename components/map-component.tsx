@@ -54,33 +54,20 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
       const { OlaMaps } = module;
       const olaMaps = new OlaMaps({ apiKey: process.env.NEXT_PUBLIC_MAP_KEY || "" });
 
-      const calculateCenter = () => {
-        if (positions.length === 0) {
-          // Fallback to India center if positions empty
-          return [74.8388, 12.8855];
-        }
-        const totalLat = positions.reduce((sum, pos) => sum + pos.latitude, 0);
-        const totalLng = positions.reduce((sum, pos) => sum + pos.longitude, 0);
-        const centerLat = totalLat / positions.length;
-        const centerLng = totalLng / positions.length;
-        return [centerLng, centerLat];
-      };
-
-      const center = calculateCenter();
-
       const map = olaMaps.init({
         style: "https://api.olamaps.io/tiles/vector/v1/styles/default-light-standard/style.json",
         container: mapRef.current!,
         zoom: 12,
-        center,
+        center: [76.6753, 24.7136],
       });
 
-      // mapInstanceRef.current = map;
+      mapInstanceRef.current = map;
 
       positions.forEach((position) => {
         const device = devices.find((d) => d.id === position.deviceId);
         if (!device) return;
 
+        // Create an <img> element for truck icon
         const el = document.createElement("img");
         el.src = "/truck.png";
         el.style.width = "40px";
@@ -89,12 +76,12 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
         const popup = olaMaps
           .addPopup({ offset: [0, -30], anchor: "bottom" })
           .setHTML(`
-          <div style="min-width:150px;">
-            <strong>${device.name}</strong><br/>
-            Status: ${device.status}<br/>
-            Location: ${position.latitude.toFixed(6)}, ${position.longitude.toFixed(6)}
-          </div>
-        `);
+            <div style="min-width:150px;">
+              <strong>${device.name}</strong><br/>
+              Status: ${device.status}<br/>
+              Location: ${position.latitude.toFixed(6)}, ${position.longitude.toFixed(6)}
+            </div>
+          `);
 
         olaMaps
           .addMarker({ element: el, anchor: "bottom" })
@@ -102,8 +89,6 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
           .setPopup(popup)
           .addTo(map);
       });
-
-      map.setZoom(12);
     });
   }, [devices, positions]);
 
@@ -128,7 +113,7 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
       const speedKmh = knotsToKmh(position.speed)
 
       const infoContent = `
-        <div style="max-width: 400px ">
+        <div style="max-width: 400px">
           <strong>${device.name}</strong> (${device.uniqueId})<br/>
           <strong>Status:</strong> ${device.status}<br/>
           <strong>Speed:</strong> ${speedKmh.toFixed(1)} km/h<br/>
