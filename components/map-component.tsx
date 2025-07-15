@@ -58,7 +58,7 @@ export function MapComponent({ devices, positions, selectedDevice, onDeviceSelec
         style: "https://api.olamaps.io/tiles/vector/v1/styles/default-light-standard/style.json",
         container: mapRef.current!,
         zoom: 12,
-        center: [76.6753, 24.7136],
+        center: [74.8388, 12.8855],
       });
 
       mapInstanceRef.current = map;
